@@ -3,7 +3,7 @@
 # ---------------------------------------------------------------------------
 
 # Lambda
-resource "aws_lambda_permission" "apigw_lambda" {
+resource "aws_lambda_permission" "this" {
   provider = aws.aws
 
   statement_id  = "AllowExecutionFromAPIGateway"

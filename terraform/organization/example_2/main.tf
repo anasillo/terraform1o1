@@ -18,7 +18,7 @@ resource "aws_s3_bucket_object" "html" {
     
     key          = each.key
     bucket       = aws_s3_bucket.this.id
-    source       = "${var.path}/static website/${each.key}"
+    source       = "${var.path}/${each.key}"
     content_type = "text/html"
 }
 

@@ -1,6 +1,6 @@
 locals {
     s3 = {
-        bucket_name = "a123123-itba-cloud-computing"
+        bucket_name = "que-lindo-es-mi-bucket-itba-cloud"
         path        = "../../resources"
 
         objects = {
