@@ -1,10 +1,8 @@
 # ---------------------------------------------------------------------------
-# Main resources
+# Dataresources
 # ---------------------------------------------------------------------------
 
 data "aws_iam_policy_document" "this" {
-    provider     = aws.aws
-
     statement {
         sid = "PublicReadGetObject"
         effect = "Allow"

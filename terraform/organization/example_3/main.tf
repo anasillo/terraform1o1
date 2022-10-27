@@ -4,24 +4,19 @@
 
 # 1 - S3 bucket
 resource "aws_s3_bucket" "this" {
-    provider = aws.aws
-
     bucket              = local.s3.bucket_name
     object_lock_enabled = false
 }
 
 # 2 -Bucket policy
 resource "aws_s3_bucket_policy" "this" {
-    provider = aws.aws
-
     bucket = aws_s3_bucket.this.id
-    policy = data.aws_iam_policy_document.this.json
+    # policy = data.aws_iam_policy_document.this.json # Another way to do this
+    policy = file("${path.module}/templates/bucket_policy.json")
 }
 
 # 3 -Website configuration
 resource "aws_s3_bucket_website_configuration" "this" {
-    provider = aws.aws
-
     bucket = aws_s3_bucket.this.id
 
     index_document {
@@ -35,8 +30,6 @@ resource "aws_s3_bucket_website_configuration" "this" {
 
 # 4 - Access Control List
 resource "aws_s3_bucket_acl" "this" {
-    provider = aws.aws
-
     bucket = aws_s3_bucket.this.id
     acl    = "public-read"
 }
@@ -44,7 +37,6 @@ resource "aws_s3_bucket_acl" "this" {
 # 5 - Upload objects
 resource "aws_s3_object" "this" {
     for_each = local.s3.objects
-    provider = aws.aws
 
     bucket        = aws_s3_bucket.this.id
     key           = replace(each.value.filename, "html/", "") # remote path
